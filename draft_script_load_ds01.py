@@ -25,4 +25,5 @@ download01 = github_session.get(ds01).content
 
 # Reading the downloaded content and making it a pandas dataframe
 df01 = pd.read_csv(io.StringIO(download01.decode('utf-8')), sep=";")
-df01.head()
+
+print(df01)
