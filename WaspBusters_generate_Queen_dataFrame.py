@@ -45,7 +45,7 @@ github_session = requests.Session()
 github_session.auth = (username, token)
     
 # Downloading the datasets from GitHub
-ds01 = "https://raw.githubusercontent.com/IEwaspbusters/KopuruVespaCompetitionIE/main/Team_datasets/WBds01_weather2municipality.csv?token=ADAWFGYYXLMXKNLVPLY54GLAOVZWE"
+ds01 = "https://raw.githubusercontent.com/IEwaspbusters/KopuruVespaCompetitionIE/main/Input_open_data/ds01_PLANTILLA-RETO-AVISPAS-KOPURU.csv?token=ADAWFG4MASEXGP6OPXOOFRDAOYHIW"
 ds02 = "https://raw.githubusercontent.com/IEwaspbusters/KopuruVespaCompetitionIE/main/Input_open_data/ds02_datos-nidos-avispa-asiatica.csv?token=ADAWFGZOUEKVV6QGYWM2TULAOUO4U"
 ds03 = "https://raw.githubusercontent.com/IEwaspbusters/KopuruVespaCompetitionIE/main/Input_open_data/ds03_APICULTURA_COLMENAS_KOPURU.csv?token=ADAWFG3KVZCCJHNWNMXYMTLAOUO5Y"
 ds04 = "https://raw.githubusercontent.com/IEwaspbusters/KopuruVespaCompetitionIE/main/Input_open_data/ds04_FRUTALES-DECLARADOS-KOPURU.csv?token=ADAWFGZYKXDSQTVUNMI2FGDAOURDU"
