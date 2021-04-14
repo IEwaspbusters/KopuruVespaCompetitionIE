@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Apr 13 06:18:34 2021
+But continually updated by these guys and gals:
 
 @authors:
     mario.bejar@student.ie.edu
