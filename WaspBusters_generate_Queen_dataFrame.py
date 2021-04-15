@@ -17,8 +17,8 @@ import numpy as np
 #import scipy.stats as ss
 
 # Viz ------------------------------------
-#import seaborn as sns
-#import matplotlib.pyplot as plt
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 # GitHub ---------------------------------
 import requests
