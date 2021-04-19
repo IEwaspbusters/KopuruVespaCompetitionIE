@@ -2,7 +2,6 @@
 """
 Created on Tue Apr 13 06:18:34 2021
 But continually updated by these guys and gals:
-
 @authors:
     mario.bejar@student.ie.edu
     isabel.perezdobarro@student.ie.edu
@@ -36,10 +35,6 @@ username = 'narrativus'
 
 ## 'uncomment' your github personal access token below:
 token = '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'
-## token = 'add PedroC's GitHub token here'
-## token = 'add Mario's GitHub token here'
-## token = 'add Isa's GitHub token here'
-## token = 'add PedroG's GitHub token here'
 
 # Creates a re-usable GitHub session object with your creds in-built
 github_session = requests.Session()
@@ -160,14 +155,17 @@ all_the_queens_wasps['month'] = pd.DatetimeIndex(all_the_queens_wasps['nest_foun
 
 # Create a "year_offset" variable in the main dataframe
 # IMPORTANT: THIS REFLECTS OUR ASSUMPTION THAT YEAR-1 DATA CAN BE USE TO PREDICT YEAR DATA
-all_the_queens_wasps['year_offset'] = pd.DatetimeIndex(all_the_queens_wasps['nest_foundDate']).year-1
+all_the_queens_wasps['year_offset'] = pd.DatetimeIndex(all_the_queens_wasps['nest_foundDate']).year -1
 
 # Now, merge the Main 'all_the_queens_wasps' dataFrame with the weather data 'WBdf02' dataFrame
 all_the_queens_wasps = pd.merge(all_the_queens_wasps, WBdf02, how = 'left', left_on = ['station_code', 'month', 'year_offset'], right_on = ['station_code', 'month', 'year'])
+
+# Translate the Euskara/Spanish contents to English
+all_the_queens_wasps.species.replace(to_replace=['AVISPA ASIÁTICA', 'AVISPA COMÚN', 'ABEJA'], value=['Vespa Velutina', 'Common Wasp', 'Wild Bee'], inplace=True)
+all_the_queens_wasps.nest_locType.replace(to_replace=['CONSTRUCCIÓN', 'ARBOLADO'], value=['Urban Environment', 'Natural Environment'], inplace=True)
+all_the_queens_wasps.nest_status.replace(to_replace=['CERRADA - ELIMINADO', 'CERRADA - NO ELIMINABLE', 'PENDIENTE DE GRUPO'], value=['Nest Terminated', 'Cannot Terminate', 'Pending classification'], inplace=True)
 
 # Save the new dataFrame as a .csv in the current working directory on Windows
 cwd = os.getcwd()
 path = cwd + "/WBds03_all_the_queens_wasps.csv"
 all_the_queens_wasps.to_csv(path, index=False)
-
-
