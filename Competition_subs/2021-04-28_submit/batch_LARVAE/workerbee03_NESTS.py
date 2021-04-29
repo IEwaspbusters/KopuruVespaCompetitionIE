@@ -4,7 +4,6 @@ Created on Tue Apr 13 06:18:34 2021
 But continually updated by these guys and gals:
 @authors:
     mario.bejar@student.ie.edu
-    isabel.perezdobarro@student.ie.edu
     pedro.geirinhas@student.ie.edu
     a.berrizbeitia@student.ie.edu
     pcasaverde@student.ie.edu
@@ -26,14 +25,13 @@ import io
 # Working environment
 import os
 
-## 'uncomment' your username below:
+# 'uncomment' your username below:
 username = 'narrativus'
-## username = 'add PedroC's GitHub username here'
-## username = 'add Mario's GitHub username here'
-## username = 'add Isa's GitHub username here'
-## username = 'add PedroG's GitHub username here'
+# username = 'add PedroC's GitHub username here'
+# username = 'add Mario's GitHub username here'
+# username = 'add PedroG's GitHub username here'
 
-## 'uncomment' your github personal access token below:
+# 'uncomment' your github personal access token below:
 token = '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'
 
 # Creates a re-usable GitHub session object with your creds in-built
