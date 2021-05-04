@@ -1,22 +1,17 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Apr 13 06:18:34 2021
-But continually updated by these guys and gals:
-@authors:
-    mario.bejar@student.ie.edu
-    pedro.geirinhas@student.ie.edu
-    a.berrizbeitia@student.ie.edu
-    pcasaverde@student.ie.edu
+Created on Tue May  4 11:23:50 2021
+
+@author: bejar
 """
+
+# 
 
 # Base -----------------------------------
 import pandas as pd
 import numpy as np
 #import scipy.stats as ss
 
-# Viz ------------------------------------
-# import seaborn as sns
-# import matplotlib.pyplot as plt
 
 # GitHub ---------------------------------
 import requests
@@ -26,7 +21,7 @@ import io
 import os
 
 # 'uncomment' your username below:
-username = 'narrativus'
+username = 'mariobejar'
 # username = 'add PedroC's GitHub username here'
 # username = 'add Mario's GitHub username here'
 # username = 'add PedroG's GitHub username here'
@@ -43,8 +38,8 @@ ds01 = "https://raw.githubusercontent.com/IEwaspbusters/KopuruVespaCompetitionIE
 ds02 = "https://raw.githubusercontent.com/IEwaspbusters/KopuruVespaCompetitionIE/main/Input_open_data/ds02_datos-nidos-avispa-asiatica.csv?token=ADAWFGZOUEKVV6QGYWM2TULAOUO4U"
 ds03 = "https://raw.githubusercontent.com/IEwaspbusters/KopuruVespaCompetitionIE/main/Input_open_data/ds03_APICULTURA_COLMENAS_KOPURU.csv?token=ADAWFG3KVZCCJHNWNMXYMTLAOUO5Y"
 ds04 = "https://raw.githubusercontent.com/IEwaspbusters/KopuruVespaCompetitionIE/main/Input_open_data/ds04_FRUTALES-DECLARADOS-KOPURU.csv?token=ADAWFGZYKXDSQTVUNMI2FGDAOURDU"
-WBds01 = 'https://raw.githubusercontent.com/IEwaspbusters/KopuruVespaCompetitionIE/main/Team_datasets/WBds01_weather2municipality.csv?token=ADAWFG5CMUNPUZZTVPBENZTAOVJCG'
-WBds02 = 'https://raw.githubusercontent.com/IEwaspbusters/KopuruVespaCompetitionIE/main/Team_datasets/WBds02_weather_agg_imputed.csv?token=ADAWFG7GVCYAOXMG64DFXQTAOVOJ6'
+WBds01 = 'https://raw.githubusercontent.com/IEwaspbusters/KopuruVespaCompetitionIE/main/Competition_subs/2021-04-28_submit/batch_LARVAE/WBds01_GEO.csv?token=ATVGE4NUO7YZVLJLHX2AZXLASEPGI'
+WBds02 = 'https://raw.githubusercontent.com/IEwaspbusters/KopuruVespaCompetitionIE/main/Competition_subs/2021-04-28_submit/batch_LARVAE/WBds02_METEO.csv?token=ATVGE4OAA3KXHBLCOOPJDHLASEPIQ'
 download01 = github_session.get(ds01).content
 download02 = github_session.get(ds02).content
 download03 = github_session.get(ds03).content
@@ -93,6 +88,23 @@ all_the_queens_wasps = pd.merge(df02, df01, how = 'left', on = 'municip_name')
 
 # Group df03 by 'municip_code' because there are multiple rows for each municipality (and we need a 1:1 relationship)
 df03 = df03.groupby(by = 'municip_code', as_index= False).colonies_amount.sum()
+
+
+# Changing 'nest_foundDate' the to "datetime" format
+all_the_queens_wasps['nest_foundDate'] = pd.to_datetime(all_the_queens_wasps['nest_foundDate'])
+
+# Create a "month" variable in the main dataframe
+all_the_queens_wasps['month'] = pd.DatetimeIndex(all_the_queens_wasps['nest_foundDate']).month
+
+# Create a "year_offset" variable in the main dataframe
+# IMPORTANT: THIS REFLECTS OUR ASSUMPTION THAT YEAR-1 DATA CAN BE USE TO PREDICT YEAR DATA
+all_the_queens_wasps['year_offset'] = pd.DatetimeIndex(all_the_queens_wasps['nest_foundDate']).year -1
+
+# Selecting and grouping the necessary variables for the larvae model
+#It will be an OLS model with a reduced data structure consisting of - location (municipality) - year - month + all weather and food_source variables (fruits and bees)
+
+all_the_queens_wasps = all_the_queens_wasps.loc[all_the_queens_wasps.species == 'AVISPA ASIÁTICA',['waspbust_id','year', 'municip_name', 'species', 'municip_code', 'month', 'year_offset']].groupby( by =['year', 'municip_name', 'species', 'municip_code', 'month', 'year_offset'], as_index = False).count()
+
 
 # Now merge df03 to add number of bee hives in each municipality
 # Note that we're also replacing NaNs (unknown amount of hives) with zeroes for the 'colonies_amount' variable
@@ -145,23 +157,14 @@ all_the_queens_wasps.food_raspberry.fillna(value=0, inplace=True)
 # Adding weather station code to main dataset "no municipality left behind!"
 all_the_queens_wasps = pd.merge(all_the_queens_wasps, WBdf01, how = 'left', on= 'municip_code')
 
-# Changing 'nest_foundDate' the to "datetime" format
-all_the_queens_wasps['nest_foundDate'] = pd.to_datetime(all_the_queens_wasps['nest_foundDate'])
-
-# Create a "month" variable in the main dataframe
-all_the_queens_wasps['month'] = pd.DatetimeIndex(all_the_queens_wasps['nest_foundDate']).month
-
-# Create a "year_offset" variable in the main dataframe
-# IMPORTANT: THIS REFLECTS OUR ASSUMPTION THAT YEAR-1 DATA CAN BE USE TO PREDICT YEAR DATA
-all_the_queens_wasps['year_offset'] = pd.DatetimeIndex(all_the_queens_wasps['nest_foundDate']).year -1
 
 # Now, merge the Main 'all_the_queens_wasps' dataFrame with the weather data 'WBdf02' dataFrame
 all_the_queens_wasps = pd.merge(all_the_queens_wasps, WBdf02, how = 'left', left_on = ['station_code', 'month', 'year_offset'], right_on = ['station_code', 'month', 'year'])
 
 # Translate the Euskara/Spanish contents to English
 all_the_queens_wasps.species.replace(to_replace=['AVISPA ASIÁTICA', 'AVISPA COMÚN', 'ABEJA'], value=['Vespa Velutina', 'Common Wasp', 'Wild Bee'], inplace=True)
-all_the_queens_wasps.nest_locType.replace(to_replace=['CONSTRUCCIÓN', 'ARBOLADO'], value=['Urban Environment', 'Natural Environment'], inplace=True)
-all_the_queens_wasps.nest_status.replace(to_replace=['CERRADA - ELIMINADO', 'CERRADA - NO ELIMINABLE', 'PENDIENTE DE GRUPO'], value=['Nest Terminated', 'Cannot Terminate', 'Pending classification'], inplace=True)
+#all_the_queens_wasps.nest_locType.replace(to_replace=['CONSTRUCCIÓN', 'ARBOLADO'], value=['Urban Environment', 'Natural Environment'], inplace=True)
+#all_the_queens_wasps.nest_status.replace(to_replace=['CERRADA - ELIMINADO', 'CERRADA - NO ELIMINABLE', 'PENDIENTE DE GRUPO'], value=['Nest Terminated', 'Cannot Terminate', 'Pending classification'], inplace=True)
 
 # Save the new dataFrame as a .csv in the current working directory on Windows
 cwd = os.getcwd()
