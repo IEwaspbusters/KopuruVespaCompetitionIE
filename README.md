@@ -1,5 +1,5 @@
 # KopuruVespaCompetitionIE
-IE Business School team (WaspBusters) for the **2021 Kopuru Vespa Velutina** data science competition.
+IE Business School team (WaspBusters) for the [**2021 Kopuru Vespa Velutina**](https://kopuru.com/desafio/vespa-velutina/) data science competition.
 
 This is the script+data workflow followed for each submission:
 ![WaspBusters workflow](https://github.com/IEwaspbusters/KopuruVespaCompetitionIE/raw/main/Competition_subs/Beeswax.jpg "THE BEESWAX is the glue that keeps it all together")
