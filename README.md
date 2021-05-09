@@ -10,8 +10,8 @@ This is the Git workflow used by the team:
 3. **"Clone"** this repository in your local JupyterLab environment, using the [HTTPS URL](https://github.com/IEwaspbusters/KopuruVespaCompetitionIE.git)
 
 for each_time_you_edit in range([now, deadline, daily]):
-|   4. Before editing, make sure you always **"Pull from remote"** the latest version of the repo
-|   5. Edit whatever script and data you need in the corresponding submission and batch folder. **.IPYNB** files are preferred in most cases
-|   6. **STAGE** any _Changed_ or _Untracked_ files (by clicking on the "+") that you want to commit (i.e. "save")
-|   7. Write a short Summary of the changes you are introducing and then click **Commit**
-|   8. Now **Push to remote** the commit you just made to see them reflected in [the WaspBuster's GitHub repo](https://github.com/IEwaspbusters/KopuruVespaCompetitionIE)
+4. Before editing, make sure you always **"Pull from remote"** the latest version of the repo
+5. Edit whatever script and data you need in the corresponding submission and batch folder. **.IPYNB** files are preferred in most cases
+6. **STAGE** any _Changed_ or _Untracked_ files (by clicking on the "+") that you want to commit (i.e. "save")
+7. Write a short Summary of the changes you are introducing and then click **Commit**
+8. Now **Push to remote** the commit you just made to see them reflected in [the WaspBuster's GitHub repo](https://github.com/IEwaspbusters/KopuruVespaCompetitionIE)
