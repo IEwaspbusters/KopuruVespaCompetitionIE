@@ -6,7 +6,8 @@ This is the script+data workflow followed for each submission:
 
 This is the Git workflow used by the team:
 1. All scripts and data go in [this GitHub repo](https://github.com/IEwaspbusters/KopuruVespaCompetitionIE)
-2. Use JupyterLab locally and install the @jupyterlab/git extension using the ["Install" instructions here](https://github.com/jupyterlab/jupyterlab-git). Note that some additional installations are sometimes required such as the latest version of Git, Conda, JupyterLab, etc.
+2. Use JupyterLab locally and install the @jupyterlab/git extension using the ["Install" instructions here](https://github.com/jupyterlab/jupyterlab-git). Note that some additional installations are sometimes required such as the latest version of Git, Conda, JupyterLab, NODE.JS (conda install -c conda-forge nodejs
+), etc.
 3. **"Clone"** this repository in your local JupyterLab environment, using the [HTTPS URL](https://github.com/IEwaspbusters/KopuruVespaCompetitionIE.git)
 4. for each_time_you_edit in range([now, deadline, daily]), before editing, make sure you always **"Pull from remote"** the latest version of the repo
 5. Edit whatever script and data you need in the corresponding submission and batch folder. **.IPYNB** files are preferred in most cases
