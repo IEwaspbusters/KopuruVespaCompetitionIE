@@ -9,7 +9,7 @@ This is the Git workflow used by the team:
 First, set up the Jupyter Lab environment with the [Git extension](https://github.com/jupyterlab/jupyterlab-git):
 1. Install anaconda
 2. Run `conda install -c conda-forge jupyterlab-git` in the conda terminal
-3. In conda terminal, run `conda install -c conda-forge nodejs
+3. In conda terminal, run `conda install -c conda-forge nodejs`
 4. In conda terminal, run `conda install -c anaconda git` (if first time installing Git, then maybe also set up your credentials: `git config --global user.name "Your name here"`
 `git config --global user.email "your_email@example.com"`)
 5. Open jupyterlab
