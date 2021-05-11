@@ -111,7 +111,7 @@ all_the_queens_wasps['month'] = pd.DatetimeIndex(all_the_queens_wasps['nest_foun
 # IMPORTANT: THIS REFLECTS OUR ASSUMPTION THAT YEAR-1 DATA CAN BE USE TO PREDICT YEAR DATA
 all_the_queens_wasps['year_offset'] = pd.DatetimeIndex(all_the_queens_wasps['nest_foundDate']).year -1
 
-# Selecting and grouping the necessary variables for the larvae model
+# Selecting and grouping the necessary variables for the ML model
 #It will be an OLS model with a reduced data structure consisting of - location (municipality) - year - month + all weather and food_source variables (fruits and bees)
 #waspbust_id will now contain the number of wasps nests pero municip - month - year
  
