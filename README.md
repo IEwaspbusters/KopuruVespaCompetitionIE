@@ -7,14 +7,14 @@ This is the script+data workflow followed for each submission:
 This is the Git workflow used by the team:
 
 First, set up the Jupyter Lab environment with the [Git extension](https://github.com/jupyterlab/jupyterlab-git):
-1.- install anaconda
-2.- either run "pip install jupyterlab-git" on the jupyterlab console, or run "conda install -c conda-forge jupyterlab-git" in the conda terminal
-3.- in conda terminal, run "conda install -c conda-forge nodejs"
-4.- in conda terminal, run "conda install -c anaconda git"
-5.- open jupyterlab
-6.- enable extensions (puzzle icon in the left bar)
-7.- scroll down to @jupyterlab/git and click "install"
-8.- When jupyterlab asks to build the git extension, click "build". Then wait for it to finish and then reload jupyterlab.
+1. install anaconda
+2. either run "pip install jupyterlab-git" on the jupyterlab console, or run "conda install -c conda-forge jupyterlab-git" in the conda terminal
+3. in conda terminal, run "conda install -c conda-forge nodejs"
+4. in conda terminal, run "conda install -c anaconda git"
+5. open jupyterlab
+6. enable extensions (puzzle icon in the left bar)
+7. scroll down to @jupyterlab/git and click "install"
+8. When jupyterlab asks to build the git extension, click "build". Then wait for it to finish and then reload jupyterlab.
 9. Still doesn't work? Reboot everything. Your laptop. All of it.
 
 Now, let's get to work:
