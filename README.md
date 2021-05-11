@@ -10,13 +10,15 @@ First, set up the Jupyter Lab environment with the [Git extension](https://githu
 1. Install anaconda
 2. Run `conda install -c conda-forge jupyterlab-git` in the conda terminal
 3. In conda terminal, run `conda install -c conda-forge nodejs
-4. In conda terminal, run `conda install -c anaconda git`
+4. In conda terminal, run `conda install -c anaconda git` (if first time installing Git, then maybe also set up your credentials: `git config --global user.name "Your name here"`
+`git config --global user.email "your_email@example.com"`)
 5. Open jupyterlab
 6. Enable extensions (puzzle icon in the left bar)
 7. Scroll down to @jupyterlab/git and click `install`
-8. When jupyterlab asks to build the git extension, click `build`. Then wait for it to finish and then reload jupyterlab.
+8. When jupyterlab asks to build the git extension, click `build`. Then wait for it to finish and then reload jupyterlab
 9. Maybe, just maybe, a git update from the jupyterlab console may be in order `pip install --upgrade jupyterlab-git`
-10. Still doesn't work? Reboot everything. Your laptop, Jupyter, Conda. All of it. Maybe a couple of times.
+10. Maybe, just maybe, if the cloning doesn't work right off the bat try in the jupyterlab console `git clone <repo url>` directly
+11. Still doesn't work? Reboot everything. Your laptop, Jupyter, Conda. All of it. Maybe a couple of times.
 
 Now, let's get to work:
 1. **"Clone"** this repository in your local JupyterLab environment, using the [HTTPS URL](https://github.com/IEwaspbusters/KopuruVespaCompetitionIE.git)
