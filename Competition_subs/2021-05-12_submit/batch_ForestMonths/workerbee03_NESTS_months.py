@@ -42,17 +42,17 @@ ds01 = "https://raw.githubusercontent.com/IEwaspbusters/KopuruVespaCompetitionIE
 ds02 = "https://raw.githubusercontent.com/IEwaspbusters/KopuruVespaCompetitionIE/main/Input_open_data/ds02_datos-nidos-avispa-asiatica.csv?token=ADAWFGZOUEKVV6QGYWM2TULAOUO4U"
 ds03 = "https://raw.githubusercontent.com/IEwaspbusters/KopuruVespaCompetitionIE/main/Input_open_data/ds03_APICULTURA_COLMENAS_KOPURU.csv?token=ADAWFG3KVZCCJHNWNMXYMTLAOUO5Y"
 ds04 = "https://raw.githubusercontent.com/IEwaspbusters/KopuruVespaCompetitionIE/main/Input_open_data/ds04_FRUTALES-DECLARADOS-KOPURU.csv?token=ADAWFGZYKXDSQTVUNMI2FGDAOURDU"
-#WBds01 = 'https://raw.githubusercontent.com/IEwaspbusters/KopuruVespaCompetitionIE/main/Competition_subs/2021-05-12_submit/WBds01_GEO.csv?token=ATVGE4N3F6YDSVY5BS5ADY3ATFNV2'
-#WBds02 = 'https://raw.githubusercontent.com/IEwaspbusters/KopuruVespaCompetitionIE/main/Competition_subs/2021-05-12_submit/WBds02_METEO.csv?token=ATVGE4LGXB6BY4K7LWKG7B3ATA7KY'
-population ='https://raw.githubusercontent.com/IEwaspbusters/KopuruVespaCompetitionIE/main/Other_open_data/population.csv?token=ATVGE4N4CRGSVCRDG2CGI53ATFQTA'
+WBds01 = 'https://raw.githubusercontent.com/IEwaspbusters/KopuruVespaCompetitionIE/main/Competition_subs/2021-05-12_submit/batch_ForestMonths/WBds01_GEO.csv?token=ATVGE4MZCIOJXTM7SUZ543DATQGA4'
+WBds02 = 'https://raw.githubusercontent.com/IEwaspbusters/KopuruVespaCompetitionIE/main/Competition_subs/2021-05-12_submit/batch_ForestMonths/WBds02_METEO.csv?token=ATVGE4KBIWLYHNUTGUCHP3LATQGDA'
+population ='https://raw.githubusercontent.com/IEwaspbusters/KopuruVespaCompetitionIE/main/Other_open_data/population.csv?token=ATVGE4MFMS6LXF6BLGQKSRLATQHCO'
 
 
 download01 = github_session.get(ds01).content
 download02 = github_session.get(ds02).content
 download03 = github_session.get(ds03).content
 download04 = github_session.get(ds04).content
-#downloadWB01 = github_session.get(WBds01).content
-#downloadWB02 = github_session.get(WBds02).content
+downloadWB01 = github_session.get(WBds01).content
+downloadWB02 = github_session.get(WBds02).content
 downloadpopulation = github_session.get(population).content
 
 
@@ -61,8 +61,8 @@ df01 = pd.read_csv(io.StringIO(download01.decode('utf-8')), sep=";")
 df02 = pd.read_csv(io.StringIO(download02.decode('utf-8')), sep=",")
 df03 = pd.read_csv(io.StringIO(download03.decode('utf-8')), sep=";")
 df04 = pd.read_csv(io.StringIO(download04.decode('utf-8')), sep=";")
-WBdf01 = pd.read_csv('./WBds01_GEO.csv', sep=',')
-WBdf02 = pd.read_csv('./WBds02_METEO.csv', sep=',')
+WBdf01 = pd.read_csv(io.StringIO(downloadWB01.decode('utf-8')), sep=",")
+WBdf02 = pd.read_csv(io.StringIO(downloadWB02.decode('utf-8')), sep=",")
 df_population = pd.read_csv(io.StringIO(downloadpopulation.decode('utf-8')), sep=",")
 
 
@@ -111,7 +111,7 @@ all_the_queens_wasps['month'] = pd.DatetimeIndex(all_the_queens_wasps['nest_foun
 # IMPORTANT: THIS REFLECTS OUR ASSUMPTION THAT YEAR-1 DATA CAN BE USE TO PREDICT YEAR DATA
 all_the_queens_wasps['year_offset'] = pd.DatetimeIndex(all_the_queens_wasps['nest_foundDate']).year -1
 
-# Selecting and grouping the necessary variables for the ML model
+# Selecting and grouping the necessary variables for the larvae model
 #It will be an OLS model with a reduced data structure consisting of - location (municipality) - year - month + all weather and food_source variables (fruits and bees)
 #waspbust_id will now contain the number of wasps nests pero municip - month - year
  
@@ -188,9 +188,9 @@ all_the_queens_wasps.drop(columns=['year_y','code_merge', 'merge_cod', 'year'], 
 
 
 # Save the new dataFrame as a .csv in the current working directory on Windows
-#cwd = os.getcwd()
-#path = cwd + "/WBds03_QUEENtrain_months.csv"
-all_the_queens_wasps.to_csv('WBds03_QUEENtrain.csv', index=False)
+cwd = os.getcwd()
+path = cwd + "/WBds03_QUEENtrain_months.csv"
+all_the_queens_wasps.to_csv(path, index=False)
 
 
 #From here on: script to create the WBds03_QUEENpredict.csv
@@ -237,7 +237,7 @@ df_temp.drop(columns=['year_y','code_merge', 'merge_cod', 'year'], inplace=True)
 
 
 # Save the new dataFrame as a .csv in the current working directory on Windows
-#cwd = os.getcwd()
-#path = cwd + "/WBds03_QUEENpredict_months.csv"
-df_temp.to_csv('WBds03_QUEENpredict.csv', index=False)
+cwd = os.getcwd()
+path = cwd + "/WBds03_QUEENpredict_months.csv"
+df_temp.to_csv(path, index=False)
 
