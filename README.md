@@ -6,6 +6,8 @@ This is the script+data workflow followed for each submission:
 
 This is the Git workflow used by the team:
 
+PENDING: add the instructions for installing: geopandas, datawig and xgboost
+
 First, set up the Jupyter Lab environment with the [Git extension](https://github.com/jupyterlab/jupyterlab-git). This is for Windows only:
 1. Install Anaconda
 2. Run `conda install -c conda-forge jupyterlab-git` in the conda terminal
