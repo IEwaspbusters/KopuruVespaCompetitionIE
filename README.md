@@ -28,3 +28,5 @@ Now, let's get to work:
 6. **STAGE** any _Changed_ or _Untracked_ files (by clicking on the "+") that you want to commit (i.e. "save")
 7. **COMMIT**. Write a short Summary of the changes you are introducing and then click **Commit**
 8. **PUSH**. Now **Push to remote** the commit you just made to see them reflected in [the WaspBuster's GitHub repo](https://github.com/IEwaspbusters/KopuruVespaCompetitionIE)
+
+EOF
